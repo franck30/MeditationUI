@@ -89,6 +89,14 @@ fun HomeScreen() {
                 )
             )
         }
+
+        BottomMenu(items = listOf(
+            BottomMenuContent("Home", R.drawable.ic_home),
+            BottomMenuContent("Medidate", R.drawable.ic_bubble),
+            BottomMenuContent("Sleep", R.drawable.ic_moon),
+            BottomMenuContent("Music", R.drawable.ic_music),
+            BottomMenuContent("Profile", R.drawable.ic_profile),
+        ))
     }
 }
 
@@ -322,33 +330,7 @@ fun FeatureItem(
         }
     }
 
-    @Composable
-    fun BottomMenu(
-        items: List<BottomMenuContent>,
-        modifier: Modifier = Modifier,
-        activeHighlightColor: Color = ButtonBlue,
-        activeTextColor: Color = Color.White,
-        inactiveTextColor: Color = AquaBlue,
-        initialSelectedItemIndex: Int = 0
-    ) {
 
-        val selectedItemIndex by remember {
-            mutableStateOf(initialSelectedItemIndex)
-        }
-
-        Row(
-            horizontalArrangement = Arrangement.SpaceAround,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(DeepBlue)
-                .padding(15.dp)
-        ) {
-            items.forEachIndexed { index, item ->
-
-            }
-        }
-    }
 }
 
 
@@ -382,6 +364,46 @@ fun BottomMenuItem(
                 tint = if(isSelected) activeTextColor else inactiveTextColor,
                 modifier = Modifier.size(20.dp)
             )
+        }
+
+        Text(
+            text = item.title,
+            color = if(isSelected) activeTextColor else inactiveTextColor)
+    }
+}
+
+
+@Composable
+fun BottomMenu(
+    items: List<BottomMenuContent>,
+    modifier: Modifier = Modifier,
+    activeHighlightColor: Color = ButtonBlue,
+    activeTextColor: Color = Color.White,
+    inactiveTextColor: Color = AquaBlue,
+    initialSelectedItemIndex: Int = 0
+) {
+
+    var selectedItemIndex by remember {
+        mutableStateOf(initialSelectedItemIndex)
+    }
+
+    Row(
+        horizontalArrangement = Arrangement.SpaceAround,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
+            .fillMaxWidth()
+            .background(DeepBlue)
+            .padding(15.dp)
+    ) {
+        items.forEachIndexed { index, item ->
+            BottomMenuItem(item = item,
+                isSelected = index == selectedItemIndex,
+                activeHighlightColor = activeHighlightColor,
+                activeTextColor = activeTextColor,
+                inactiveTextColor = inactiveTextColor) {
+
+                selectedItemIndex = index
+            }
         }
     }
 }
