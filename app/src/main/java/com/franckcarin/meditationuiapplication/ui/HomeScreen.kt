@@ -96,7 +96,7 @@ fun HomeScreen() {
             BottomMenuContent("Sleep", R.drawable.ic_moon),
             BottomMenuContent("Music", R.drawable.ic_music),
             BottomMenuContent("Profile", R.drawable.ic_profile),
-        ))
+        ), modifier = Modifier.align(Alignment.BottomCenter))
     }
 }
 
@@ -117,11 +117,13 @@ fun GreetingSection(
         ) {
             Text(
                 text = "Good morning, $name",
-                style = MaterialTheme.typography.h2
+                style = MaterialTheme.typography.h6,
+                color = TextWhite
             )
             Text(
-                text = "We wish you have a good day.!",
-                style = MaterialTheme.typography.body1
+                text = "We wish you have a good day!",
+                color = Color.Gray,
+                style = MaterialTheme.typography.body1,
             )
         }
 
@@ -181,7 +183,8 @@ fun CurrentMeditation(
         Column {
             Text(
                 text = "Daily Thought",
-                style = MaterialTheme.typography.h2
+                style = MaterialTheme.typography.h6,
+                color = TextWhite
             )
             Text(
                 text = "Meditation • 3-10 min",
@@ -215,7 +218,8 @@ fun FeatureSection(features: List<Feature>) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(
             text = "Features",
-            style = MaterialTheme.typography.h1,
+            style = MaterialTheme.typography.h6,
+            color = TextWhite,
             modifier = Modifier.padding(15.dp)
         )
         
@@ -300,7 +304,8 @@ fun FeatureItem(
         ) {
             Text(
                 text = feature.title,
-                style = MaterialTheme.typography.h2,
+                style = MaterialTheme.typography.body1,
+                color = TextWhite,
                 lineHeight = 26.sp,
                 modifier = Modifier.align(Alignment.TopStart)
             )
@@ -348,7 +353,7 @@ fun BottomMenuItem(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement =  Arrangement.Center,
         modifier = Modifier.clickable {
-            onItemClick
+            onItemClick()
         }
     ) {
         Box(
